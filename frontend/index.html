@@ -9,25 +9,15 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <div id="dniModal" class="modal">
-        <div class="modal-content">
-            <span class="close" id="closeModal">&times;</span>
-            <h2>Ingrese su DNI</h2>
-            <input type="text" id="dniInput" placeholder="Número de documento" required>
-            <button id="continueButton" class="btn btn-primary mt-3">Continuar</button>
-        </div>
-    </div>
-
     <div id="candidatesContainer" class="container mt-5">
-        <h2 class="text-center mb-4">Candidatos</h2>
+        <h2 class="text-center mb-4">Elecciones</h2>
         <div class="row">
             <div class="col-md-4">
                 <div class="card candidate-card">
-                    <img src="./images/imagen1.jpeg" class="card-img-top" alt="Candidato 1">
+                    <img src="./images/candidatos.jpg" class="card-img-top" alt="Candidato 1">
                     <div class="card-body text-center">
-                        <img src="./images/imagen2.jpg" alt="Partido 1" class="img-fluid mb-2" style="max-width: 50px;">
-                        <h5 class="card-title">Candidato 1</h5>
-                        <button class="btn btn-success">Seleccionar</button>
+                        <h5 class="card-title">Candidatos</h5>
+                        <a href="./candidato/registrar_candidato.html" class="btn btn-success">Seleccionar</a>
                     </div>
                 </div>
             </div>
@@ -35,40 +25,18 @@
                 <div class="card candidate-card">
                     <img src="./images/imagen1.jpeg" class="card-img-top" alt="Candidato 2">
                     <div class="card-body text-center">
-                        <img src="./images/imagen2.jpg" alt="Partido 2" class="img-fluid mb-2" style="max-width: 50px;">
-                        <h5 class="card-title">Candidato 2</h5>
-                        <button class="btn btn-success">Seleccionar</button>
+                        <h5 class="card-title">Votantes</h5>
+                        <a href="./votantes/registrar_votante.html" class="btn btn-success">Seleccionar</a>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card candidate-card">
-                    <img src="./images/imagen1.jpeg" class="card-img-top" alt="Candidato 3">
+                    <img src="./images/gaandor.jpg" class="card-img-top" alt="Candidato 3">
                     <div class="card-body text-center">
-                        <img src="./images/imagen2.jpg" alt="Partido 3" class="img-fluid mb-2" style="max-width: 50px;">
-                        <h5 class="card-title">Candidato 3</h5>
-                        <button class="btn btn-success">Seleccionar</button>
+                        <h5 class="card-title">Votacion</h5>
+                        <a href="./votacion.html" class="btn btn-success">Seleccionar</a>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="confirmationModal" class="modal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="confirmationTitle">Confirmación de Voto</h5>
-                    <button type="button" class="btn-close" id="closeConfirmationModal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p id="confirmationMessage" class="text-center fs-5">
-                        ¿Estás seguro de votar por este candidato?
-                    </p>
-                </div>
-                <div class="modal-footer">
-                    <button id="confirmVote" class="btn btn-primary">Confirmar</button>
-                    <button id="cancelVote" class="btn btn-secondary">Cancelar</button>
                 </div>
             </div>
         </div>

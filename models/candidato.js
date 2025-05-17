@@ -1,21 +1,17 @@
 import mongoose from "mongoose";
 
 const candidatoSchema = new mongoose.Schema({
-  name: {
+  nombre: {
     type: String,
     required: true,
   },
-  photo: {
+  partido: {
     type: String,
     required: true,
   },
-  partyLogo: {
-    type: String,
-    required: true,
-  },
-  partyName: {
-    type: String,
-    required: true,
+  votos: {
+    type: Number,
+    default: 0,
   },
 });
 

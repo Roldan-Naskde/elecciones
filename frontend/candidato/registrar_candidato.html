@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Candidato</title>
+    <link rel="stylesheet" href="../css/candidato.css">
+</head>
+
+<body>
+    <header>
+        <h1>Registro de Candidatos</h1>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="listar_candidato.html">Lista de Candidatos</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="seccion activa">
+            <h2>Registrar Candidato</h2>
+            <form id="formCandidato" class="formulario-candidato">
+                <div class="campo-formulario">
+                    <label for="nombreCandidato">Nombre del Candidato</label>
+                    <input type="text" id="nombreCandidato" required>
+                </div>
+
+                <div class="campo-formulario">
+                    <label for="partidoCandidato">Partido Político</label>
+                    <input type="text" id="partidoCandidato" required>
+                </div>
+                <button type="submit" class="btn-guardar">Guardar Candidato</button>
+            </form>
+        </section>
+    </main>
+    <script src="../js/registrar_candidato.js"></script>
+</body>
+
+</html>
