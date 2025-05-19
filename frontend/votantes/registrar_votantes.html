@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Registro de Votantes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/votante.css">
+</head>
+
+<body>
+    <div class="contenedor">
+        <header>
+            <h1>🎉 ¡Registra tu voto! 🗳️</h1>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="lista_votantes.html">Lista de Votantes</a></li>
+                </ul>
+            </nav>
+        </header>
+        <form id="formulario-votante">
+            <input type="text" id="nombre" placeholder="👤 Nombre completo" required>
+            <input type="text" id="dni" placeholder="🪪 DNI" required maxlength="8">
+            <button type="submit">Registrar ✍️</button>
+        </form>
+        <div id="mensaje" class="oculto">✅ ¡Votante registrado con éxito!</div>
+    </div>
+
+    <canvas id="confetti"></canvas>
+    <script src="../js/registrar_votante.js"></script>
+</body>
+
+</html>

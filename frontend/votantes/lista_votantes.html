@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lista de Votantes 🗳️</title>
+  <link rel="stylesheet" href="../css/lista-votantes.css" />
+</head>
+
+<body>
+  <header>
+    <h1>🗳️ Lista de Votantes</h1>
+    <nav>
+      <ul>
+        <li><a href="../index.html">🏠 Inicio</a></li>
+        <li><a href="registrar_votantes.html">➕ Registrar Votante</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="buscador">
+      <input type="text" id="buscarInput" placeholder="🔍 Buscar por nombre o DNI..." />
+    </section>
+
+    <section class="lista-container">
+      <ul id="listaVotantes" class="lista-votantes">
+        <!-- Aquí se cargan los votantes -->
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>🎉 ¡Gracias por participar en nuestra democracia! 🎉</p>
+  </footer>
+
+  <script src="../js/lista_votante.js"></script>
+</body>
+
+</html>

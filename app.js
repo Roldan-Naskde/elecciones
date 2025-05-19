@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import Voto from "./models/voto.js";
 import Candidato from "./models/candidato.js";
-import votante from "./models/votante.js";
+import Votante from "./models/votante.js";
 import ganador from "./models/ganador.js";
 
 
@@ -71,14 +71,14 @@ app.delete("/candidatos/:id", async (req, res) => {
 
 // Crear un nuevo votante
 app.post("/votantes", async (req, res) => {
-  const { nombre, cedula } = req.body;
+  const { nombre, dni } = req.body;
 
-  if (!nombre || !cedula) {
-    return res.status(400).json({ error: "Nombre y cédula son requeridos" });
+  if (!nombre || !dni) {
+    return res.status(400).json({ error: "Nombre y DNI son requeridos" });
   }
 
   try {
-    const votante = new votante({ nombre, cedula });
+    const votante = new Votante({ nombre, dni });
     const savedVotante = await votante.save();
 
     res.status(201).json({ message: "Votante creado exitosamente", votante: savedVotante });
@@ -87,22 +87,22 @@ app.post("/votantes", async (req, res) => {
   }
 });
 
-//listar votantes
-app.get("/votantes", async (req, res) => {
+// Obtener todos los votantes
+app.get("/votante", async (req, res) => {
   try {
-    const votantes = await votante.find();
-    res.status(200).json(votantes);
+    const votante = await Votante.find();
+    res.status(200).json(votante);
   } catch (error) {
     res.status(500).json({ error: "Error al obtener los votantes", details: error });
   }
 });
 
 //eliminar un votante
-app.delete("/votantes/:id", async (req, res) => {
+app.delete("/votante/:id", async (req, res) => {
   const { id } = req.params;
 
   try {
-    const votante = await votante.findByIdAndDelete(id);
+    const votante = await Votante.findByIdAndDelete(id);
     if (!votante) {
       return res.status(404).json({ error: "Votante no encontrado" });
     }
@@ -132,6 +132,7 @@ app.post("/votos", async (req, res) => {
     res.status(500).json({ error: "Error al registrar el voto", details: error });
   }
 });
+
 
 //obtener un ganador por el candidato con más votos
 // Esta ruta obtiene el candidato con más votos y lo devuelve como el ganador
