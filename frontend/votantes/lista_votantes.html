@@ -1,41 +1,41 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lista de Votantes 🗳️</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="../css/lista-votantes.css" />
 </head>
 
 <body>
-  <header>
-    <h1>🗳️ Lista de Votantes</h1>
-    <nav>
-      <ul>
-        <li><a href="../index.html">🏠 Inicio</a></li>
-        <li><a href="registrar_votantes.html">➕ Registrar Votante</a></li>
-      </ul>
-    </nav>
+  <header class="bg-primary text-white p-3">
+    <div class="container d-flex justify-content-between align-items-center">
+      <h1 class="h3 mb-0">🗳️ Lista de Votantes</h1>
+      <nav>
+        <a href="../index.html" class="btn btn-light me-2">🏠 Inicio</a>
+        <a href="registrar_votantes.html" class="btn btn-light">➕ Registrar Votante</a>
+      </nav>
+    </div>
   </header>
 
-  <main>
-    <section class="buscador">
-      <input type="text" id="buscarInput" placeholder="🔍 Buscar por nombre o DNI..." />
+  <main class="container mt-4">
+    <section class="mb-4">
+      <input type="text" id="buscarInput" class="form-control" placeholder="🔍 Buscar por nombre o DNI..." />
     </section>
 
     <section class="lista-container">
-      <ul id="listaVotantes" class="lista-votantes">
+      <ul id="listaVotantes" class="list-group">
         <!-- Aquí se cargan los votantes -->
       </ul>
     </section>
   </main>
 
-  <footer>
-    <p>🎉 ¡Gracias por participar en nuestra democracia! 🎉</p>
+  <footer class="bg-light text-center py-3 mt-5">
+    <p class="mb-0">🎉 ¡Gracias por participar en nuestra democracia! 🎉</p>
   </footer>
 
   <script src="../js/lista_votante.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>

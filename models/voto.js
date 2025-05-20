@@ -4,7 +4,6 @@ import mongoose from 'mongoose';
 const votoSchema = new mongoose.Schema({
     votanteId: { type: mongoose.Schema.Types.ObjectId, ref: 'Votante', required: true },
     candidatoId: { type: mongoose.Schema.Types.ObjectId, ref: 'Candidato', required: true },
-    fecha: { type: Date, default: Date.now }
 });
 
 const Voto = mongoose.model('Voto', votoSchema);

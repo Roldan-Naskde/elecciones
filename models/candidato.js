@@ -8,6 +8,7 @@ const candidatoSchema = new mongoose.Schema({
   partido: {
     type: String,
     required: true,
+    unique: true
   },
   votos: {
     type: Number,

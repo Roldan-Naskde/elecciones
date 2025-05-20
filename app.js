@@ -34,15 +34,27 @@ mongoose.connect(MONGO_URI)
 app.post('/candidatos', async (req, res) => {
     const { nombre, partido } = req.body;
 
-    const candidato = new Candidato({ nombre, partido });
+    if (!nombre || !partido) {
+        return res.status(400).json({ message: 'Nombre y partido son requeridos' });
+    }
 
     try {
+        // Verificar si ya existe un candidato con ese partido
+        const partidoExistente = await Candidato.findOne({ partido: partido });
+
+        if (partidoExistente) {
+            return res.status(400).json({ message: 'Ya existe un candidato con ese nombre de partido' });
+        }
+
+        const candidato = new Candidato({ nombre, partido });
         const savedCandidato = await candidato.save();
+
         res.status(201).json(savedCandidato);
     } catch (error) {
         res.status(400).json({ message: 'Error al crear el candidato', error });
     }
 });
+
 
 // Obtener todos los candidatos
 app.get("/candidatos", async (req, res) => {
@@ -51,6 +63,22 @@ app.get("/candidatos", async (req, res) => {
     res.status(200).json(candidatos);
   } catch (error) {
     res.status(500).json({ error: "Error al obtener los candidatos", details: error });
+  }
+});
+
+//editar un candidato
+app.put("/candidatos/:id", async (req, res) => {
+  const { id } = req.params;
+  const { nombre, partido } = req.body;
+
+  try {
+    const candidato = await Candidato.findByIdAndUpdate(id, { nombre, partido }, { new: true });
+    if (!candidato) {
+      return res.status(404).json({ error: "Candidato no encontrado" });
+    }
+    res.status(200).json(candidato);
+  } catch (error) {
+    res.status(500).json({ error: "Error al editar el candidato", details: error });
   }
 });
 
@@ -97,8 +125,24 @@ app.get("/votante", async (req, res) => {
   }
 });
 
+//editar un votante
+app.put("/votantes/:id", async (req, res) => {
+  const { id } = req.params;
+  const { nombre, dni } = req.body;
+
+  try {
+    const votante = await Votante.findByIdAndUpdate(id, { nombre, dni }, { new: true });
+    if (!votante) {
+      return res.status(404).json({ error: "Votante no encontrado" });
+    }
+    res.status(200).json(votante);
+  } catch (error) {
+    res.status(500).json({ error: "Error al editar el votante", details: error });
+  }
+});
+
 //eliminar un votante
-app.delete("/votante/:id", async (req, res) => {
+app.delete("/votantes/:id", async (req, res) => {
   const { id } = req.params;
 
   try {
@@ -152,6 +196,24 @@ app.get("/ganador", async (req, res) => {
     res.status(500).json({ error: "Error al obtener el ganador", details: error });
   }
 });
+
+//nueva votación
+app.post("/nueva-votacion", async (req, res) => {
+  try {
+    // Limpiar la colección de votos
+    await Voto.deleteMany({});
+
+    // Reiniciar los votos de los candidatos
+    await Candidato.updateMany({}, { $set: { votos: 0 } });
+
+    res.status(200).json({ message: "Nueva votación iniciada" });
+  } catch (error) {
+    res.status(500).json({ error: "Error al iniciar nueva votación", details: error });
+  }
+}); 
+
+
+
 
 // Iniciar el servidor
 app.listen(PORT, () => {

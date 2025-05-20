@@ -22,7 +22,13 @@ form.addEventListener('submit', async (e) => {
             body: JSON.stringify({ nombre, partido })
         });
 
-        if (!response.ok) throw new Error('Error al registrar candidato');
+        const data = await response.json();
+
+        if (!response.ok) {
+            // Muestra el mensaje personalizado desde el backend
+            alert(data.message || 'Error al registrar candidato');
+            return;
+        }
 
         alert('Candidato registrado exitosamente');
         form.reset();
