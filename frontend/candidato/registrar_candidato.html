@@ -2,41 +2,57 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrar Candidato</title>
-    <link rel="stylesheet" href="../css/candidato.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registrar Candidato</title>
+  <link rel="stylesheet" href="../css/candidato.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap" rel="stylesheet" />
 </head>
 
 <body>
-    <header>
-        <h1>Registro de Candidatos</h1>
-        <nav>
-            <ul>
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="listar_candidato.html">Lista de Candidatos</a></li>
-            </ul>
-        </nav>
-    </header>
+  <div id="particles-js"></div>
+  <header>
+    <h1>🗳️ Registro de Candidatos</h1>
+    <nav>
+      <ul>
+        <li><a href="../index.html">🏠 Home</a></li>
+        <li><a href="listar_candidato.html">📋 Lista de Candidatos</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <main>
-        <section class="seccion activa">
-            <h2>Registrar Candidato</h2>
-            <form id="formCandidato" class="formulario-candidato">
-                <div class="campo-formulario">
-                    <label for="nombreCandidato">Nombre del Candidato</label>
-                    <input type="text" id="nombreCandidato" required>
-                </div>
+  <main>
+    <section class="seccion activa">
+      <h2>📌 Agrega un nuevo candidato</h2>
+      <form id="formCandidato" class="formulario-candidato">
+        <div class="campo-formulario">
+          <label for="nombreCandidato">Nombre del Candidato</label>
+          <input type="text" id="nombreCandidato" placeholder="Ej. María Pérez" required />
+        </div>
 
-                <div class="campo-formulario">
-                    <label for="partidoCandidato">Partido Político</label>
-                    <input type="text" id="partidoCandidato" required>
-                </div>
-                <button type="submit" class="btn-guardar">Guardar Candidato</button>
-            </form>
-        </section>
-    </main>
-    <script src="../js/registrar_candidato.js"></script>
+        <div class="campo-formulario">
+          <label for="partidoCandidato">Partido Político</label>
+          <input type="text" id="partidoCandidato" placeholder="Ej. Partido Esperanza" required />
+        </div>
+        <button type="submit" class="btn-guardar">💾 Guardar Candidato</button>
+      </form>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script>
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 45 },
+        color: { value: "#81c784" },
+        shape: { type: "circle" },
+        opacity: { value: 0.2 },
+        size: { value: 4 },
+        move: { enable: true, speed: 1 }
+      }
+    });
+  </script>
+  <script src="../js/registrar_candidato.js"></script>
 </body>
 
 </html>

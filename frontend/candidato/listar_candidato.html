@@ -1,33 +1,36 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Candidatos</title>
-    <link rel="stylesheet" href="../css/listar-candidatos.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lista de Candidatos</title>
+  <link rel="stylesheet" href="../css/listar-candidatos.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka&display=swap" rel="stylesheet"/>
 </head>
-
 <body>
-    <header>
-        <h1>Lista de Candidatos</h1>
-        <nav>
-            <ul>
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="registrar_candidato.html">Registrar Candidato</a></li>
-            </ul>
-        </nav>
-    </header>
+  <header>
+    <h1>🗳️ Lista de Candidatos</h1>
+    <nav>
+      <ul>
+        <li><a href="../index.html">🏠 Inicio</a></li>
+        <li><a href="registrar_candidato.html">➕ Registrar Candidato</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <main>
-        <section class="seccion">
-            <h2>Lista de Candidatos Registrados</h2>
-            <div class="contenedor-candidatos" id="contenedorCandidatos">
-                <!-- Candidatos serán insertados aquí dinámicamente -->
-            </div>
-        </section>
-    </main>
-    <script src="../js/listar_candidatos.js"></script>
+  <main>
+    <section class="seccion">
+      <h2>👥 Candidatos Registrados</h2>
+      <div class="contenedor-candidatos" id="contenedorCandidatos">
+        <!-- Las tarjetas de candidatos se agregarán aquí dinámicamente -->
+      </div>
+    </section>
+  </main>
+
+  <div class="decoracion-svg">
+    <svg viewBox="0 0 1440 320"><path fill="#a5d6a7" fill-opacity="1" d="M0,224L48,218.7C96,213,192,203,288,202.7C384,203,480,213,576,202.7C672,192,768,160,864,165.3C960,171,1056,213,1152,213.3C1248,213,1344,171,1392,149.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
+  </div>
+
+  <script src="../js/listar_candidatos.js"></script>
 </body>
-
 </html>

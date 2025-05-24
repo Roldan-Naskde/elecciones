@@ -2,72 +2,57 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aplicación de Elecciones</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elecciones</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
-    <div id="candidatesContainer" class="container mt-5">
-        <h2 class="text-center mb-4">Elecciones</h2>
-        <div class="row justify-content-center">
-            <div class="col-md-4">
-                <div class="card candidate-card">
-                    <img src="./images/gaandor.jpg" class="card-img-top" alt="Candidato 1">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Candidatos</h5>
-                        <a href="./candidato/listar_candidato.html" class="btn btn-success">Seleccionar</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card candidate-card">
-                    <img src="./images/imagen1.jpeg" class="card-img-top" alt="Candidato 1">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Votantes</h5>
-                        <a href="./votantes/lista_votantes.html" class="btn btn-success">Seleccionar</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card candidate-card">
-                    <img src="./images/candidatos.jpg" class="card-img-top" alt="Candidato 3">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Votacion</h5>
-                        <a href="./votacion.html" class="btn btn-success mb-2">Seleccionar</a>
-                        <button id="nuevaVotacionBtn" class="btn btn-primary mb-2">Nueva Votación</button>
-                    </div>
-                </div>
-            </div>
+  <div id="particles-js"></div>
+  <header>
+    <h1>🗳️ Sistema de Elecciones</h1>
+    <p>Seleccione una opción para continuar</p>
+  </header>
+
+  <div class="container mb-5">
+    <div class="row justify-content-center g-4">
+      <div class="col-md-4">
+        <div class="card candidate-card text-white">
+          <img src="./images/gaandor.jpg" alt="Candidatos">
+          <div class="card-body text-center">
+            <h5 class="card-title">Candidatos</h5>
+            <a href="./candidato/listar_candidato.html" class="btn btn-custom">Seleccionar</a>
+          </div>
         </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card candidate-card text-white">
+          <img src="./images/imagen1.jpeg" alt="Votantes">
+          <div class="card-body text-center">
+            <h5 class="card-title">Votantes</h5>
+            <a href="./votantes/lista_votantes.html" class="btn btn-custom">Seleccionar</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card candidate-card text-white">
+          <img src="./images/candidatos.jpg" alt="Votación">
+          <div class="card-body text-center">
+            <h5 class="card-title">Votación</h5>
+            <a href="./votacion.html" class="btn btn-custom mb-2">Seleccionar</a>
+            <button id="nuevaVotacionBtn" class="btn btn-primary mb-2">Nueva Votación</button>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <!-- Bootstrap JS Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        document.getElementById('nuevaVotacionBtn').addEventListener('click', async () => {
-            if (confirm('¿Estás seguro de que deseas iniciar una nueva votación? Esto eliminará todos los votos anteriores.')) {
-                try {
-                    const response = await fetch('/reiniciar-votacion', { method: 'POST' });
-                    const data = await response.json();
-
-                    if (data.success) {
-                        alert('✅ Nueva votación iniciada correctamente.');
-                        window.location.href = './index.html'; // o a donde quieras redirigir
-                    } else {
-                        alert('❌ No se pudo reiniciar la votación.');
-                    }
-                } catch (error) {
-                    console.error('Error al reiniciar:', error);
-                    alert('❌ Error del servidor al intentar reiniciar la votación.');
-                }
-            }
-        });
-    </script>
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script src="./js/inicio.js"></script>
 </body>
 
 </html>

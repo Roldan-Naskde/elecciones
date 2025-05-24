@@ -1,18 +1,53 @@
-// registrar_votante.js
-
 const formulario = document.getElementById('formulario-votante');
 const mensaje = document.getElementById('mensaje');
+const nombreInput = document.getElementById('nombre');
+const dniInput = document.getElementById('dni');
+const boton = formulario.querySelector('button');
 
+const soloLetrasRegex = /^[a-zA-ZÁÉÍÓÚáéíóúÑñ\s]+$/;
+
+// Permitir solo números en el campo DNI
+dniInput.addEventListener('input', () => {
+  dniInput.value = dniInput.value.replace(/\D/g, '');
+  validarFormulario();
+});
+
+// Permitir solo letras en el nombre en tiempo real
+nombreInput.addEventListener('input', () => {
+  nombreInput.value = nombreInput.value.replace(/[^a-zA-ZÁÉÍÓÚáéíóúÑñ\s]/g, '');
+  validarFormulario();
+});
+
+// Validar si el formulario es válido
+function validarFormulario() {
+  const nombreValido = soloLetrasRegex.test(nombreInput.value.trim());
+  const dniValido = /^\d{8}$/.test(dniInput.value.trim());
+  boton.disabled = !(nombreValido && dniValido);
+}
+
+// Capitalizar cada palabra
+function capitalizarTexto(texto) {
+  return texto.replace(/\b\w/g, letra => letra.toUpperCase());
+}
+
+// Validación y envío del formulario
 formulario.addEventListener('submit', async function (e) {
   e.preventDefault();
 
-  const nombre = document.getElementById('nombre').value.trim();
-  const dni = document.getElementById('dni').value.trim();
+  let nombre = nombreInput.value.trim();
+  const dni = dniInput.value.trim();
 
-  if (nombre === '' || dni === '') {
-    alert('Por favor, completa todos los campos.');
+  if (!soloLetrasRegex.test(nombre)) {
+    alert('El nombre solo debe contener letras y espacios.');
     return;
   }
+
+  if (!/^\d{8}$/.test(dni)) {
+    alert('El DNI debe tener exactamente 8 dígitos numéricos.');
+    return;
+  }
+
+  nombre = capitalizarTexto(nombre);
 
   try {
     const response = await fetch('http://localhost:3000/votantes', {
@@ -20,12 +55,13 @@ formulario.addEventListener('submit', async function (e) {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ nombre, dni})
+      body: JSON.stringify({ nombre, dni })
     });
 
     if (!response.ok) throw new Error('Error al registrar votante');
 
     formulario.reset();
+    boton.disabled = true;
     mensaje.classList.remove('oculto');
     lanzarConfetti();
 
@@ -38,6 +74,7 @@ formulario.addEventListener('submit', async function (e) {
   }
 });
 
+// Confetti animación
 function lanzarConfetti() {
   const canvas = document.getElementById('confetti');
   const ctx = canvas.getContext('2d');

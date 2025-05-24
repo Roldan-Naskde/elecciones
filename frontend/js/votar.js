@@ -23,10 +23,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try {
       const res = await fetch('http://localhost:3000/votante');
-      if (!res.ok) throw new Error("No se pudo obtener los votantes");
       const votantes = await res.json();
-
       const encontrado = votantes.find(v => v.dni === dni);
+
       if (encontrado) {
         votanteActual = encontrado;
         bienvenida.textContent = `👋 Bienvenido, ${encontrado.nombre}`;
@@ -39,7 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
         dniError.classList.remove('d-none');
       }
     } catch (err) {
-      console.error("Error al buscar votante:", err);
       dniError.textContent = "❌ Error de conexión con el servidor";
       dniError.classList.remove('d-none');
     }
@@ -48,10 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
   async function verificarSiYaVoto() {
     try {
       const res = await fetch('http://localhost:3000/votos');
-      if (!res.ok) throw new Error("No se pudo obtener votos");
       const votos = await res.json();
-
       const yaVoto = votos.some(v => v.votanteId === votanteActual._id || v.votanteId?._id === votanteActual._id);
+
       if (yaVoto) {
         bienvenida.textContent = `👋 Hola, ${votanteActual.nombre}`;
         finalizarBtn.classList.add('d-none');
@@ -62,7 +59,6 @@ document.addEventListener('DOMContentLoaded', () => {
         finalizarBtn.classList.remove('d-none');
       }
     } catch (err) {
-      console.error("Error al verificar si ya votó:", err);
       contenedorCandidatos.innerHTML = '<p class="text-danger">❌ Error al verificar el estado del voto.</p>';
     }
   }
@@ -70,7 +66,6 @@ document.addEventListener('DOMContentLoaded', () => {
   async function cargarCandidatos() {
     try {
       const res = await fetch('http://localhost:3000/candidatos');
-      if (!res.ok) throw new Error("No se pudo cargar los candidatos");
       const candidatos = await res.json();
 
       contenedorCandidatos.innerHTML = '';
@@ -84,17 +79,14 @@ document.addEventListener('DOMContentLoaded', () => {
               <p class="card-text">Partido: ${c.partido}</p>
               <button class="btn btn-success votar-btn" data-id="${c._id}">Votar</button>
             </div>
-          </div>
-        `;
+          </div>`;
         contenedorCandidatos.appendChild(card);
       });
 
       document.querySelectorAll('.votar-btn').forEach(btn => {
         btn.addEventListener('click', () => votarPorCandidato(btn.dataset.id));
       });
-
     } catch (error) {
-      console.error("Error al cargar candidatos:", error);
       contenedorCandidatos.innerHTML = '<p class="text-danger">❌ Error al cargar candidatos.</p>';
     }
   }
@@ -103,11 +95,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!votanteActual || !votanteActual._id) {
       alert("❌ Error: votante no válido. Por favor, vuelve a ingresar el DNI.");
       reiniciarModal();
-      return;
-    }
-
-    if (!candidatoId) {
-      alert("❌ Error: candidato no válido.");
       return;
     }
 
@@ -131,9 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         alert("⚠️ " + (data.error || "Error al votar"));
       }
-
     } catch (error) {
-      console.error("Error al registrar voto:", error);
       alert("❌ Error al registrar el voto");
     }
   }
@@ -151,7 +136,6 @@ document.addEventListener('DOMContentLoaded', () => {
         ganadorMensaje.textContent = '❌ No se pudo determinar un ganador aún.';
       }
     } catch (error) {
-      console.error("Error al obtener ganador:", error);
       ganadorMensaje.textContent = '❌ Error al obtener ganador.';
     }
   });

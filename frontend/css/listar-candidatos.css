@@ -1,94 +1,154 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #e8f5e9;
-    color: #333;
+  font-family: 'Fredoka', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to right, #c8e6c9, #a5d6a7);
+  color: #333;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
 }
 
-/* Encabezado */
 header {
-    background-color: #1b5e20;
-    color: white;
-    padding: 20px;
-    text-align: center;
+  background-color: #2e7d32;
+  color: white;
+  padding: 30px 20px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2em;
+  letter-spacing: 1px;
 }
 
 nav ul {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 10px;
+  list-style: none;
+  padding: 0;
+  margin: 15px 0 0;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
 }
 
 nav a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background-color: #43a047;
+  transition: background 0.3s ease;
 }
 
 nav a:hover {
-    text-decoration: underline;
+  background-color: #388e3c;
 }
 
-/* Contenido principal */
 main {
-    padding: 40px 20px;
-    display: flex;
-    justify-content: center;
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
 }
 
 .seccion {
-    width: 100%;
-    max-width: 1000px;
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 1100px;
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 2;
 }
 
 h2 {
-    text-align: center;
-    margin-bottom: 30px;
+  text-align: center;
+  font-size: 1.8em;
+  margin-bottom: 30px;
 }
 
 .contenedor-candidatos {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 25px;
 }
 
-.card-candidato {
-    width: 250px;
-    border-radius: 10px;
-    background-color: #f1f8e9;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    padding: 15px;
-    text-align: center;
+/* Tarjetas */
+.tarjeta-candidato {
+  background-color: #f1f8e9;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
 }
 
-.card-candidato img {
-    width: 100%;
-    border-radius: 10px;
-    margin-bottom: 10px;
+.tarjeta-candidato:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-.card-candidato h3 {
-    margin: 10px 0 5px;
+.tarjeta-candidato img.logo {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  margin-bottom: 10px;
 }
 
-.card-candidato p {
-    margin: 0;
-    font-size: 14px;
+.tarjeta-candidato img.foto {
+  width: 100px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  border: 3px solid #a5d6a7;
 }
 
-/* Pie de página */
-footer {
-    background-color: #c8e6c9;
-    text-align: center;
-    padding: 15px;
-    margin-top: 40px;
+.partido {
+  font-size: 1em;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #33691e;
+}
+
+.detalle strong {
+  display: block;
+  font-size: 1.1em;
+  margin-bottom: 5px;
+  color: #2e7d32;
+}
+
+.btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.btn-group button {
+  padding: 6px 12px;
+  font-size: 0.9em;
+  border: none;
+  border-radius: 6px;
+  background-color: #66bb6a;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-group button:hover {
+  background-color: #558b2f;
+}
+
+/* Decoración SVG */
+.decoracion-svg {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  z-index: 0;
 }

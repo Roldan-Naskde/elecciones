@@ -2,11 +2,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const contenedor = document.getElementById('contenedorCandidatos');
 
     const imagenespartido = {
-        'DEFAULT': './images/default.png',
-        // Agrega más logos como 'PARTIDOX': 'ruta/partidox.png'
+        'DEFAULT': '/images/default.png',
+        // Puedes agregar más como: 'PARTIDOX': '/images/partidox.png'
     };
 
-    const imagenCandidatoDefault = './images/candidato_default.png';
+    const imagenCandidatoDefault = '/images/candidato_default.png';
 
     fetch('/candidatos')
         .then(res => res.json())
@@ -19,20 +19,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 div.classList.add('tarjeta-candidato');
                 div.innerHTML = `
                     <h3 class="partido">${candidato.partido}</h3>
-                    <div class="contenido">
-                        <img src="${logo}" alt="Logo del partido" class="logo">
-                        <img src="${imagenCandidatoDefault}" alt="Foto del candidato" class="foto">
-                    </div>
+                    <img src="${logo}" alt="Logo del partido" class="logo">
                     <div class="detalle">
-                        <p><strong>Presidente:</strong> ${candidato.nombre}</p>
+                        <strong>${candidato.nombre}</strong>
+                        <img src="${imagenCandidatoDefault}" alt="Foto del candidato" class="foto">
                         <div class="btn-group mt-2">
                             <button class="btn btn-sm btn-warning editar-btn" data-id="${candidato._id}">✏️ Editar</button>
                             <button class="btn btn-sm btn-danger eliminar-btn" data-id="${candidato._id}">🗑️ Eliminar</button>
-                        </div>
-                    </div>
-                `;
+                     </div>
+                </div>
+            `;
                 contenedor.appendChild(div);
             });
+
 
             // Asignar eventos después de renderizar
             document.querySelectorAll('.editar-btn').forEach(btn => {

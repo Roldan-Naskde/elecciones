@@ -1,36 +1,112 @@
 body {
   margin: 0;
   padding: 0;
-  background: linear-gradient(135deg, #fceabb, #f8b500);
   font-family: 'Fredoka', sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   height: 100vh;
   overflow: hidden;
+  position: relative;
+  background: linear-gradient(135deg, #ffe082, #ffca28);
+}
+
+.burbujas-bg .burbuja {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  animation: flotar 10s infinite ease-in-out;
+}
+
+.burbuja:nth-child(1) {
+  width: 60px;
+  height: 60px;
+  left: 10%;
+  animation-delay: 0s;
+}
+.burbuja:nth-child(2) {
+  width: 80px;
+  height: 80px;
+  left: 30%;
+  animation-delay: 2s;
+}
+.burbuja:nth-child(3) {
+  width: 40px;
+  height: 40px;
+  left: 60%;
+  animation-delay: 4s;
+}
+.burbuja:nth-child(4) {
+  width: 70px;
+  height: 70px;
+  left: 80%;
+  animation-delay: 6s;
+}
+.burbuja:nth-child(5) {
+  width: 50px;
+  height: 50px;
+  left: 50%;
+  animation-delay: 8s;
+}
+
+@keyframes flotar {
+  0% {
+    bottom: -100px;
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    bottom: 110%;
+    opacity: 0;
+  }
 }
 
 .contenedor {
-  background-color: white;
-  padding: 30px;
+  background: white;
+  padding: 35px;
   border-radius: 25px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
   width: 350px;
+  text-align: center;
+  margin: auto;
   position: relative;
   z-index: 2;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-h1 {
-  font-size: 1.6em;
-  margin-bottom: 20px;
+header h1 {
+  font-size: 1.7em;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-around;
+}
+
+nav a {
+  text-decoration: none;
+  color: #ff9800;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color: #f57c00;
 }
 
 form input {
   width: 100%;
   padding: 12px;
   margin: 10px 0;
-  border: 2px solid #ffca28;
+  border: 2px solid #ffd54f;
   border-radius: 15px;
   font-size: 1em;
 }

@@ -1,34 +1,42 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8">
-    <title>Registro de Votantes</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/votante.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Registro de Votantes</title>
+  <link rel="stylesheet" href="../css/votante.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka&display=swap" rel="stylesheet"/>
 </head>
-
 <body>
-    <div class="contenedor">
-        <header>
-            <h1>🎉 ¡Registra tu voto! 🗳️</h1>
-            <nav>
-                <ul>
-                    <li><a href="../index.html">Home</a></li>
-                    <li><a href="lista_votantes.html">Lista de Votantes</a></li>
-                </ul>
-            </nav>
-        </header>
-        <form id="formulario-votante">
-            <input type="text" id="nombre" placeholder="👤 Nombre completo" required>
-            <input type="text" id="dni" placeholder="🪪 DNI" required maxlength="8">
-            <button type="submit">Registrar ✍️</button>
-        </form>
-        <div id="mensaje" class="oculto">✅ ¡Votante registrado con éxito!</div>
-    </div>
+  <div class="burbujas-bg">
+    <div class="burbuja"></div>
+    <div class="burbuja"></div>
+    <div class="burbuja"></div>
+    <div class="burbuja"></div>
+    <div class="burbuja"></div>
+  </div>
 
-    <canvas id="confetti"></canvas>
-    <script src="../js/registrar_votante.js"></script>
+  <div class="contenedor">
+    <header>
+      <h1><svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.14 2 5 5.14 5 9c0 3.87 3.13 7 7 7s7-3.13 7-7c0-3.86-3.14-7-7-7zm0 12c-2.76 0-5-2.24-5-5S9.24 4 12 4s5 2.24 5 5-2.24 5-5 5z"/><path d="M0 20h24v2H0z"/></svg> ¡Registra tu voto!</h1>
+      <nav>
+        <ul>
+          <li><a href="../index.html">🏠 Home</a></li>
+          <li><a href="lista_votantes.html">📋 Lista de Votantes</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <form id="formulario-votante">
+      <input type="text" id="nombre" placeholder="👤 Nombre completo" required />
+      <input type="text" id="dni" placeholder="🪪 DNI (solo números)" required maxlength="8" pattern="\d*" />
+      <button type="submit">Registrar ✍️</button>
+    </form>
+
+    <div id="mensaje" class="oculto">✅ ¡Votante registrado con éxito!</div>
+  </div>
+
+  <canvas id="confetti"></canvas>
+  <script src="../js/registrar_votante.js"></script>
 </body>
-
 </html>
