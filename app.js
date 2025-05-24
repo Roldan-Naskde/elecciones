@@ -156,24 +156,83 @@ app.delete("/votantes/:id", async (req, res) => {
   }
 });
 
-//registrar un voto
 app.post("/votos", async (req, res) => {
   const { votanteId, candidatoId } = req.body;
 
+  // Validar parámetros requeridos
   if (!votanteId || !candidatoId) {
     return res.status(400).json({ error: "ID de votante y candidato son requeridos" });
   }
 
   try {
+    // Validar existencia del votante
+    const votante = await Votante.findById(votanteId);
+    if (!votante) {
+      return res.status(404).json({ error: "Votante no encontrado" });
+    }
+
+    // Validar existencia del candidato
+    const candidato = await Candidato.findById(candidatoId);
+    if (!candidato) {
+      return res.status(404).json({ error: "Candidato no encontrado" });
+    }
+
+    // Verificar si el votante ya ha votado
+    const yaVoto = await Voto.findOne({ votanteId });
+    if (yaVoto) {
+      return res.status(400).json({ error: "Este votante ya ha votado" });
+    }
+
+    // Registrar el voto
     const voto = new Voto({ votanteId, candidatoId });
     const savedVoto = await voto.save();
 
-    // Incrementar el conteo de votos del candidato
+    // Actualizar el número de votos del candidato
     await Candidato.findByIdAndUpdate(candidatoId, { $inc: { votos: 1 } });
 
-    res.status(201).json({ message: "Voto registrado exitosamente", voto: savedVoto });
+    // Respuesta exitosa
+    res.status(201).json({
+      message: "✅ Voto registrado exitosamente",
+      voto: savedVoto,
+      candidato: {
+        nombre: candidato.nombre,
+        partido: candidato.partido
+      }
+    });
+
   } catch (error) {
-    res.status(500).json({ error: "Error al registrar el voto", details: error });
+    console.error("Error al registrar el voto:", error);
+    res.status(500).json({
+      error: "❌ Error al registrar el voto",
+      details: error.message
+    });
+  }
+});
+
+//listar todos los votos
+app.get("/votos", async (req, res) => {
+  try {
+    const votos = await Voto.find().populate("votanteId").populate("candidatoId");
+    res.status(200).json(votos);
+  } catch (error) {
+    res.status(500).json({ error: "Error al obtener los votos", details: error });
+  }
+});
+
+//reiniciar los votos
+app.post("/reiniciar-votacion", async (req, res) => {
+  try {
+    await Voto.deleteMany({});
+    await ganador.deleteMany({});
+    await Votante.updateMany({}, { haVotado: false }); // Reinicia la marca de votantes
+
+    // ¡Esta línea resetea los votos de todos los candidatos!
+    await Candidato.updateMany({}, { $set: { votos: 0 } });
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error('Error reiniciando votación:', err);
+    res.status(500).json({ success: false });
   }
 });
 
@@ -196,24 +255,6 @@ app.get("/ganador", async (req, res) => {
     res.status(500).json({ error: "Error al obtener el ganador", details: error });
   }
 });
-
-//nueva votación
-app.post("/nueva-votacion", async (req, res) => {
-  try {
-    // Limpiar la colección de votos
-    await Voto.deleteMany({});
-
-    // Reiniciar los votos de los candidatos
-    await Candidato.updateMany({}, { $set: { votos: 0 } });
-
-    res.status(200).json({ message: "Nueva votación iniciada" });
-  } catch (error) {
-    res.status(500).json({ error: "Error al iniciar nueva votación", details: error });
-  }
-}); 
-
-
-
 
 // Iniciar el servidor
 app.listen(PORT, () => {
