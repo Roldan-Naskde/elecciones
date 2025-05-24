@@ -242,19 +242,42 @@ app.post("/reiniciar-votacion", async (req, res) => {
 app.get("/ganador", async (req, res) => {
   try {
     const candidatos = await Candidato.find();
-    const ganador = candidatos.reduce((prev, curr) => {
-      return (curr.votos > prev.votos) ? curr : prev;
-    }, { votos: 0 });
 
-    if (ganador.votos > 0) {
-      res.status(200).json({ message: "Ganador encontrado", ganador });
+    if (candidatos.length === 0) {
+      return res.status(404).json({ message: "No hay candidatos registrados" });
+    }
+
+    // Encontrar la mayor cantidad de votos
+    const maxVotos = Math.max(...candidatos.map(c => c.votos));
+
+    // Filtrar candidatos con esa cantidad de votos
+    const ganadores = candidatos.filter(c => c.votos === maxVotos);
+
+    if (maxVotos === 0) {
+      return res.status(404).json({ message: "No se encontró un ganador, todos tienen 0 votos" });
+    }
+
+    if (ganadores.length === 1) {
+      // Hay un solo ganador
+      return res.status(200).json({
+        message: "Ganador encontrado",
+        ganador: ganadores[0]
+      });
     } else {
-      res.status(404).json({ message: "No se encontró un ganador" });
+      // Empate entre varios candidatos
+      return res.status(200).json({
+        message: "Empate entre candidatos",
+        ganadores
+      });
     }
   } catch (error) {
-    res.status(500).json({ error: "Error al obtener el ganador", details: error });
+    res.status(500).json({
+      error: "Error al obtener el ganador",
+      details: error
+    });
   }
 });
+
 
 // Iniciar el servidor
 app.listen(PORT, () => {

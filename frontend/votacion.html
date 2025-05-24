@@ -2,52 +2,101 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Votación</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="../css/votar.css">
+  <!-- Particles.js para fondo animado -->
+  <style>
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: #f8f9fa;
+      z-index: -1;
+    }
+  </style>
 </head>
 <body>
 
-  <div class="container mt-5 text-center">
-    <h1>🗳️ Sistema de Votación</h1>
-    <p id="bienvenida" class="mt-3 fs-4"></p>
+  <!-- Fondo animado -->
+  <div id="particles-js"></div>
 
-    <!-- Contenedor para mensaje del ganador -->
+  <div class="container mt-5 text-center animate__animated animate__fadeIn">
+    <h1 class="fw-bold text-dark">🗳️ Sistema de Votación</h1>
+    <p id="bienvenida" class="mt-3 fs-4 text-primary"></p>
+
     <div id="ganadorMensaje" class="fs-5 mt-3 text-success"></div>
 
-    <!-- Contenedor de candidatos -->
     <div id="contenedorCandidatos" class="row justify-content-center mt-4"></div>
 
-    <!-- Botón para finalizar y ver ganador -->
     <button class="btn btn-primary mt-4 d-none" id="finalizarBtn">Finalizar y ver ganador</button>
 
-    <!-- Botones adicionales -->
     <div class="mt-4">
       <button class="btn btn-secondary d-none" id="cambiarDniBtn">Cambiar de votante</button>
       <button class="btn btn-info d-none" id="inicioBtn">Volver al inicio</button>
     </div>
   </div>
 
-  <!-- Modal para ingresar DNI -->
+  <!-- Modal de DNI -->
   <div class="modal fade" id="dniModal" tabindex="-1" aria-labelledby="dniModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
+      <div class="modal-content shadow-lg border-0">
+        <div class="modal-header bg-primary text-white">
           <h5 class="modal-title" id="dniModalLabel">Identifícate con tu DNI</h5>
         </div>
         <div class="modal-body">
-          <input type="text" id="dniInput" class="form-control" placeholder="Ingrese su DNI">
+          <input type="text" id="dniInput" class="form-control shadow-sm" placeholder="Ingrese su DNI">
           <div id="dniError" class="text-danger mt-2 d-none">❌ DNI no encontrado</div>
         </div>
         <div class="modal-footer">
-          <button class="btn btn-primary" id="validarDniBtn">Ingresar</button>
+          <button class="btn btn-success" id="validarDniBtn">Ingresar</button>
         </div>
       </div>
     </div>
   </div>
 
+  <!-- JS externos -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></script>
   <script src="../js/votar.js"></script>
+
+  <!-- Configuración de Particles.js -->
+  <script>
+    particlesJS('particles-js', {
+      particles: {
+        number: { value: 40 },
+        color: { value: "#007bff" },
+        shape: { type: "circle" },
+        opacity: { value: 0.3 },
+        size: { value: 4 },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: "#007bff",
+          opacity: 0.2,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 2,
+          direction: "none",
+          out_mode: "out"
+        }
+      },
+      interactivity: {
+        events: {
+          onhover: { enable: true, mode: "grab" },
+          onclick: { enable: true, mode: "push" }
+        },
+        modes: {
+          grab: { distance: 150, line_linked: { opacity: 0.5 } },
+          push: { particles_nb: 4 }
+        }
+      },
+      retina_detect: true
+    });
+  </script>
 </body>
 </html>

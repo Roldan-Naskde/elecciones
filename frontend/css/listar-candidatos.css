@@ -91,36 +91,6 @@ h2 {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-.tarjeta-candidato img.logo {
-  width: 60px;
-  height: 60px;
-  object-fit: contain;
-  margin-bottom: 10px;
-}
-
-.tarjeta-candidato img.foto {
-  width: 100px;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  border: 3px solid #a5d6a7;
-}
-
-.partido {
-  font-size: 1em;
-  font-weight: bold;
-  margin-bottom: 5px;
-  color: #33691e;
-}
-
-.detalle strong {
-  display: block;
-  font-size: 1.1em;
-  margin-bottom: 5px;
-  color: #2e7d32;
-}
-
 .btn-group {
   display: flex;
   justify-content: center;
@@ -151,4 +121,45 @@ h2 {
   overflow: hidden;
   line-height: 0;
   z-index: 0;
+}
+
+/* NUEVO ESTILO PARA INFO DE CANDIDATOS */
+.info-candidato-horizontal {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin-bottom: 15px;
+}
+
+.fila-nombres {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: 1em;
+  margin-bottom: 10px;
+  color: #2e7d32;
+}
+
+.nombre-candidato,
+.nombre-partido {
+  flex: 1;
+  text-align: center;
+}
+
+.fila-imagenes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.foto,
+.logo {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 3px solid #81c784;
+  background-color: white;
 }

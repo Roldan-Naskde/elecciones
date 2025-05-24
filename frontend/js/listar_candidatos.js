@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const imagenespartido = {
         'DEFAULT': '/images/default.png',
-        // Puedes agregar más como: 'PARTIDOX': '/images/partidox.png'
+        // Agrega más partidos: 'PARTIDOX': '/images/partidox.png'
     };
 
     const imagenCandidatoDefault = '/images/candidato_default.png';
@@ -18,20 +18,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 const div = document.createElement('div');
                 div.classList.add('tarjeta-candidato');
                 div.innerHTML = `
-                    <h3 class="partido">${candidato.partido}</h3>
-                    <img src="${logo}" alt="Logo del partido" class="logo">
-                    <div class="detalle">
-                        <strong>${candidato.nombre}</strong>
-                        <img src="${imagenCandidatoDefault}" alt="Foto del candidato" class="foto">
-                        <div class="btn-group mt-2">
-                            <button class="btn btn-sm btn-warning editar-btn" data-id="${candidato._id}">✏️ Editar</button>
-                            <button class="btn btn-sm btn-danger eliminar-btn" data-id="${candidato._id}">🗑️ Eliminar</button>
-                     </div>
-                </div>
-            `;
+                    <div class="info-candidato-horizontal">
+                        <div class="fila-nombres">
+                            <span class="nombre-candidato">${candidato.nombre}</span>
+                            <span class="nombre-partido">${candidato.partido}</span>
+                        </div>
+                        <div class="fila-imagenes">
+                            <img src="${imagenCandidatoDefault}" alt="Foto del candidato" class="foto" />
+                            <img src="${logo}" alt="Logo del partido" class="logo" />
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <button class="btn btn-sm btn-warning editar-btn" data-id="${candidato._id}">✏️ Editar</button>
+                        <button class="btn btn-sm btn-danger eliminar-btn" data-id="${candidato._id}">🗑️ Eliminar</button>
+                    </div>
+                `;
+
                 contenedor.appendChild(div);
             });
-
 
             // Asignar eventos después de renderizar
             document.querySelectorAll('.editar-btn').forEach(btn => {

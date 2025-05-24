@@ -124,21 +124,42 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   finalizarBtn.addEventListener('click', async () => {
-    try {
-      const res = await fetch('http://localhost:3000/ganador');
-      const data = await res.json();
+  try {
+    const res = await fetch('http://localhost:3000/ganador');
+    const data = await res.json();
 
-      if (res.ok && data.ganador) {
-        ganadorMensaje.textContent = `🎉 El ganador es ${data.ganador.nombre} del partido ${data.ganador.partido} con ${data.ganador.votos} votos.`;
-        contenedorCandidatos.innerHTML = '';
-        finalizarBtn.disabled = true;
-      } else {
-        ganadorMensaje.textContent = '❌ No se pudo determinar un ganador aún.';
-      }
-    } catch (error) {
-      ganadorMensaje.textContent = '❌ Error al obtener ganador.';
+    if (res.ok && data.ganador) {
+      // Un solo ganador
+      ganadorMensaje.innerHTML = `
+        🎉 <strong>Ganador:</strong> ${data.ganador.nombre} <br>
+        🏛️ <strong>Partido:</strong> ${data.ganador.partido} <br>
+        🗳️ <strong>Votos:</strong> ${data.ganador.votos}
+      `;
+      contenedorCandidatos.innerHTML = '';
+      finalizarBtn.disabled = true;
+
+    } else if (res.ok && data.ganadores) {
+      // Empate
+      ganadorMensaje.innerHTML = `
+        ⚠️ <strong>Empate entre los siguientes candidatos:</strong><br><br>
+        ${data.ganadores.map(c => `
+          👤 ${c.nombre} (${c.partido}) - 🗳️ ${c.votos} votos
+        `).join('<br>')}<br><br>
+        🔁 Por favor, reinicie la votación.
+      `;
+      contenedorCandidatos.innerHTML = '';
+      finalizarBtn.disabled = true;
+
+    } else {
+      ganadorMensaje.textContent = '❌ No se pudo determinar un ganador aún.';
     }
-  });
+
+  } catch (error) {
+    ganadorMensaje.textContent = '❌ Error al obtener ganador.';
+    console.error(error);
+  }
+});
+
 
   function mostrarBotonesAccion() {
     cambiarDniBtn.classList.remove('d-none');
